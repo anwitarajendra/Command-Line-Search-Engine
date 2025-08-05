@@ -7,14 +7,14 @@ A simple yet powerful offline search engine built in Python. It indexes a folder
 -  Full-text search over .txt files
 -  Inverted Index for fast lookup
 -  Contextual snippets from matching lines
--  Command Line + Optional Streamlit UI
+-  Command Line 
 -  No internet required (fully offline)
 
 ## Tech Stack
 
 - Python 3
 - os, re, collections (for indexing)
-- Streamlit (for optional web interface)
+
 
 ## How It Works
 
