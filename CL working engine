@@ -48,7 +48,7 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "📁 'data' folder created!\n"
+            " 'data' folder created!\n"
           ]
         }
       ]
@@ -107,10 +107,10 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "📁 'data' folder created!\n",
-            "✅ Advanced technical documents created in 'data/' folder!\n",
+            "'data' folder created!\n",
+            " Advanced technical documents created in 'data/' folder!\n",
             "\n",
-            "📂 Files in 'data/' folder:\n",
+            "Files in 'data/' folder:\n",
             "['doc3.txt', 'doc2.txt', 'doc1.txt', 'doc4.txt', 'doc5.txt']\n"
           ]
         }
@@ -136,7 +136,7 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "📂 Files in data/:\n",
+            " Files in data/:\n",
             "['doc3.txt', 'doc2.txt', 'doc1.txt', 'doc4.txt', 'doc5.txt']\n"
           ]
         }
@@ -199,7 +199,7 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "📚 Inverted index (sample):\n",
+            "Inverted index (sample):\n",
             "quantum: ['doc3.txt']\n",
             "computing: ['doc3.txt']\n",
             "leverages: ['doc3.txt']\n",
@@ -257,10 +257,10 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "🔍 Enter your search query: reinforcement learning\n",
+            "Enter your search query: reinforcement learning\n",
             "\n",
-            "✅ Documents containing 'reinforcement learning':\n",
-            "📄 doc4.txt\n"
+            " Documents containing 'reinforcement learning':\n",
+            "doc4.txt\n"
           ]
         }
       ]
@@ -322,9 +322,9 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "🔍 Enter your search query: what\n",
+            "Enter your search query: what\n",
             "\n",
-            "❌ No relevant documents found.\n"
+            "No relevant documents found.\n"
           ]
         }
       ]
@@ -364,12 +364,12 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "🔍 Enter your search query: reinforcement learning\n",
+            "Enter your search query: reinforcement learning\n",
             "\n",
-            "📈 Top ranked documents for query: 'reinforcement learning'\n",
-            "📄 doc4.txt → Score: 0.0492\n",
-            "📄 doc2.txt → Score: 0.0409\n",
-            "📁 Results saved to search_results.csv\n"
+            "Top ranked documents for query: 'reinforcement learning'\n",
+            "doc4.txt → Score: 0.0492\n",
+            "doc2.txt → Score: 0.0409\n",
+            " Results saved to search_results.csv\n"
           ]
         }
       ]
@@ -420,12 +420,12 @@
           "output_type": "stream",
           "name": "stdout",
           "text": [
-            "🔍 Enter fuzzy search query: agntic ai\n",
-            "🧠 Corrected query: semantic ai\n",
+            "Enter fuzzy search query: agntic ai\n",
+            "Corrected query: semantic ai\n",
             "\n",
-            "📈 Fuzzy TF-IDF Results:\n",
-            "📄 doc5.txt → Score: 0.0327\n",
-            "📄 doc4.txt → Score: 0.0316\n"
+            "Fuzzy TF-IDF Results:\n",
+            "doc5.txt → Score: 0.0327\n",
+            "doc4.txt → Score: 0.0316\n"
           ]
         }
       ]
@@ -667,7 +667,7 @@
         "    return sorted(scores.items(), key=lambda x: x[1], reverse=True)\n",
         "\n",
         "\n",
-        "st.title(\"🧠 Mini Search Engine\")\n",
+        "st.title(\"Mini Search Engine\")\n",
         "st.markdown(\"Enter a keyword or phrase to search across text documents.\")\n",
         "\n",
         "folder_path = st.text_input(\"Folder containing .txt files\", \"docs\")\n",
