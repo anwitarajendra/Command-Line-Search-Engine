@@ -1,0 +1,825 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyO5acTX9nUzj+tArTpg2KUF",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/anwitarajendra/Command-Line-Search-Engine/blob/main/CL%20working%20engine\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "\n",
+        "\n",
+        "os.makedirs(\"data\", exist_ok=True)\n",
+        "print(\" 'data' folder created!\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "FFbXPw4dsWdj",
+        "outputId": "9bfc665e-6ab4-4057-f53f-8065cb2df41e"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "📁 'data' folder created!\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "\n",
+        "os.makedirs(\"data\", exist_ok=True)\n",
+        "print(\" 'data' folder created!\")\n",
+        "\n",
+        "documents = {\n",
+        "    \"doc1.txt\": (\n",
+        "        \"Transformers are neural network architectures based on self-attention mechanisms. \"\n",
+        "        \"They form the backbone of large language models like GPT and BERT, enabling contextual understanding of sequences.\"\n",
+        "    ),\n",
+        "    \"doc2.txt\": (\n",
+        "        \"Federated learning is a decentralized machine learning technique where data remains on-device. \"\n",
+        "        \"It helps ensure user privacy while collaboratively training global models across distributed devices.\"\n",
+        "    ),\n",
+        "    \"doc3.txt\": (\n",
+        "        \"Quantum computing leverages qubits and quantum gates to solve problems intractable for classical computers. \"\n",
+        "        \"Quantum supremacy is a milestone where a quantum processor solves a task beyond classical feasibility.\"\n",
+        "    ),\n",
+        "    \"doc4.txt\": (\n",
+        "        \"Reinforcement learning is used in robotics and game AI to optimize agents via rewards and penalties. \"\n",
+        "        \"Algorithms like Proximal Policy Optimization and Q-Learning are widely applied in dynamic environments.\"\n",
+        "    ),\n",
+        "    \"doc5.txt\": (\n",
+        "        \"Vector embeddings are low-dimensional representations of high-dimensional data, commonly used in NLP, search, and recommendation systems. \"\n",
+        "        \"Models like Word2Vec and Sentence Transformers convert semantic meaning into numeric vectors.\"\n",
+        "    ),\n",
+        "}\n",
+        "\n",
+        "for filename, text in documents.items():\n",
+        "    with open(f\"data/{filename}\", \"w\") as f:\n",
+        "        f.write(text)\n",
+        "\n",
+        "print(\"Advanced technical documents created in 'data/' folder!\")\n",
+        "\n",
+        "\n",
+        "print(\"\\n Files in 'data/' folder:\")\n",
+        "print(os.listdir(\"data\"))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "azZ4Oxsxs94c",
+        "outputId": "c94272ab-3864-4a8e-883d-d6b6bd2db383"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "📁 'data' folder created!\n",
+            "✅ Advanced technical documents created in 'data/' folder!\n",
+            "\n",
+            "📂 Files in 'data/' folder:\n",
+            "['doc3.txt', 'doc2.txt', 'doc1.txt', 'doc4.txt', 'doc5.txt']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "print(\"Files in data/:\")\n",
+        "print(os.listdir(\"data\"))\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "PXWRVfUts_k3",
+        "outputId": "7ca401cc-624c-44d3-b4c8-bdcc90519399"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "📂 Files in data/:\n",
+            "['doc3.txt', 'doc2.txt', 'doc1.txt', 'doc4.txt', 'doc5.txt']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "A44L7oOrtDek"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "import string\n",
+        "from collections import defaultdict\n",
+        "\n",
+        "\n",
+        "DATA_DIR = \"data\"\n",
+        "\n",
+        "def preprocess(text):\n",
+        "\n",
+        "    translator = str.maketrans(\"\", \"\", string.punctuation)\n",
+        "    text = text.translate(translator).lower()\n",
+        "    words = text.split()\n",
+        "    return words\n",
+        "\n",
+        "\n",
+        "inverted_index = defaultdict(set)\n",
+        "\n",
+        "for filename in os.listdir(DATA_DIR):\n",
+        "    if filename.endswith(\".txt\"):\n",
+        "        filepath = os.path.join(DATA_DIR, filename)\n",
+        "        with open(filepath, \"r\") as f:\n",
+        "            contents = f.read()\n",
+        "            words = preprocess(contents)\n",
+        "            for word in words:\n",
+        "                inverted_index[word].add(filename)\n",
+        "\n",
+        "\n",
+        "print(\"Inverted index (sample):\")\n",
+        "for i, (word, files) in enumerate(inverted_index.items()):\n",
+        "    if i < 10:\n",
+        "        print(f\"{word}: {list(files)}\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "irOQWpxAtNH4",
+        "outputId": "1a6d9144-93e0-416a-e1f6-aa49f2ab5488"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "📚 Inverted index (sample):\n",
+            "quantum: ['doc3.txt']\n",
+            "computing: ['doc3.txt']\n",
+            "leverages: ['doc3.txt']\n",
+            "qubits: ['doc3.txt']\n",
+            "and: ['doc1.txt', 'doc5.txt', 'doc4.txt', 'doc3.txt']\n",
+            "gates: ['doc3.txt']\n",
+            "to: ['doc4.txt', 'doc3.txt']\n",
+            "solve: ['doc3.txt']\n",
+            "problems: ['doc3.txt']\n",
+            "intractable: ['doc3.txt']\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "\n",
+        "def search_keywords(query, inverted_index):\n",
+        "    query = query.lower().translate(str.maketrans(\"\", \"\", string.punctuation))\n",
+        "    keywords = query.split()\n",
+        "    results = []\n",
+        "\n",
+        "    for keyword in keywords:\n",
+        "        files = inverted_index.get(keyword, set())\n",
+        "        results.append(files)\n",
+        "\n",
+        "    if not results:\n",
+        "        return set()\n",
+        "\n",
+        "\n",
+        "    matched_files = set.intersection(*results)\n",
+        "    return matched_files\n",
+        "\n",
+        "query = input(\"Enter your search query: \")\n",
+        "matched = search_keywords(query, inverted_index)\n",
+        "\n",
+        "if matched:\n",
+        "    print(f\"\\nDocuments containing '{query}':\")\n",
+        "    for file in matched:\n",
+        "        print(\"📄\", file)\n",
+        "else:\n",
+        "    print(f\"\\n No documents found containing '{query}'.\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qIjOZaIxtQ8M",
+        "outputId": "14838399-9221-4bb7-e3b9-adb5d2013cba"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "🔍 Enter your search query: reinforcement learning\n",
+            "\n",
+            "✅ Documents containing 'reinforcement learning':\n",
+            "📄 doc4.txt\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import math\n",
+        "\n",
+        "total_documents = len([f for f in os.listdir(DATA_DIR) if f.endswith(\".txt\")])\n",
+        "\n",
+        "doc_freq = {}\n",
+        "for word in inverted_index:\n",
+        "    doc_freq[word] = len(inverted_index[word])\n",
+        "\n",
+        "\n",
+        "def compute_tfidf(query, inverted_index, doc_freq):\n",
+        "    query = query.lower().translate(str.maketrans(\"\", \"\", string.punctuation))\n",
+        "    query_words = query.split()\n",
+        "\n",
+        "    scores = defaultdict(float)\n",
+        "\n",
+        "    for word in query_words:\n",
+        "        if word in inverted_index:\n",
+        "            idf = math.log(total_documents / (1 + doc_freq[word]))\n",
+        "            for file in inverted_index[word]:\n",
+        "\n",
+        "                filepath = os.path.join(DATA_DIR, file)\n",
+        "                with open(filepath, \"r\") as f:\n",
+        "                    contents = f.read()\n",
+        "                    words = preprocess(contents)\n",
+        "                    tf = words.count(word) / len(words)\n",
+        "                    tfidf = tf * idf\n",
+        "                    scores[file] += tfidf\n",
+        "\n",
+        "    return sorted(scores.items(), key=lambda x: x[1], reverse=True)\n",
+        "\n",
+        "\n",
+        "query = input(\" Enter your search query: \")\n",
+        "results = compute_tfidf(query, inverted_index, doc_freq)\n",
+        "\n",
+        "if results:\n",
+        "    print(f\"\\nTop ranked documents for query: '{query}'\")\n",
+        "    for file, score in results:\n",
+        "        print(f\"{file} → Score: {score:.4f}\")\n",
+        "else:\n",
+        "    print(\"\\nNo relevant documents found.\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Na-NnIZWt4ui",
+        "outputId": "e31436fa-1259-4817-f680-f396793536e7"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "🔍 Enter your search query: what\n",
+            "\n",
+            "❌ No relevant documents found.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "\n",
+        "def save_results_to_csv(results, query, filename=\"search_results.csv\"):\n",
+        "    df = pd.DataFrame(results, columns=[\"Document\", \"TF-IDF Score\"])\n",
+        "    df.insert(0, \"Query\", query)\n",
+        "    df.to_csv(filename, index=False)\n",
+        "    print(f\"Results saved to {filename}\")\n",
+        "\n",
+        "query = input(\"Enter your search query: \")\n",
+        "results = compute_tfidf(query, inverted_index, doc_freq)\n",
+        "\n",
+        "if results:\n",
+        "    print(f\"\\nTop ranked documents for query: '{query}'\")\n",
+        "    for file, score in results:\n",
+        "        print(f\"{file} → Score: {score:.4f}\")\n",
+        "    save_results_to_csv(results, query)\n",
+        "else:\n",
+        "    print(\"No results found.\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "pLx_8KsbuGgh",
+        "outputId": "439171bd-6fb2-404c-bbc7-47a4f01ebac0"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "🔍 Enter your search query: reinforcement learning\n",
+            "\n",
+            "📈 Top ranked documents for query: 'reinforcement learning'\n",
+            "📄 doc4.txt → Score: 0.0492\n",
+            "📄 doc2.txt → Score: 0.0409\n",
+            "📁 Results saved to search_results.csv\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import difflib\n",
+        "\n",
+        "\n",
+        "\n",
+        "def correct_word(word, vocabulary):\n",
+        "    if word in vocabulary:\n",
+        "        return word\n",
+        "    suggestions = difflib.get_close_matches(word, vocabulary, n=1, cutoff=0.6)\n",
+        "    return suggestions[0] if suggestions else word\n",
+        "\n",
+        "\n",
+        "def fuzzy_search(query, inverted_index):\n",
+        "    query = query.lower().translate(str.maketrans(\"\", \"\", string.punctuation))\n",
+        "    tokens = query.split()\n",
+        "    corrected = [correct_word(token, inverted_index.keys()) for token in tokens]\n",
+        "\n",
+        "    print(\"Corrected query:\", \" \".join(corrected))\n",
+        "    return compute_tfidf(\" \".join(corrected), inverted_index, doc_freq)\n",
+        "\n",
+        "\n",
+        "query = input(\"Enter fuzzy search query: \")\n",
+        "fuzzy_results = fuzzy_search(query, inverted_index)\n",
+        "\n",
+        "if fuzzy_results:\n",
+        "    print(\"\\nFuzzy TF-IDF Results:\")\n",
+        "    for doc, score in fuzzy_results:\n",
+        "        print(f\"{doc} → Score: {score:.4f}\")\n",
+        "else:\n",
+        "    print(\"No close match found.\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "hZsPxf6duYzD",
+        "outputId": "620b031d-2064-4ac9-86ff-a58168d4870a"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "🔍 Enter fuzzy search query: agntic ai\n",
+            "🧠 Corrected query: semantic ai\n",
+            "\n",
+            "📈 Fuzzy TF-IDF Results:\n",
+            "📄 doc5.txt → Score: 0.0327\n",
+            "📄 doc4.txt → Score: 0.0316\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "pip install streamlit\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sUdcUyEkufGj",
+        "outputId": "650d01f4-8bbc-4f3f-d076-44611b680afc"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting streamlit\n",
+            "  Downloading streamlit-1.47.1-py3-none-any.whl.metadata (9.0 kB)\n",
+            "Requirement already satisfied: altair<6,>=4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.5.0)\n",
+            "Requirement already satisfied: blinker<2,>=1.5.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (1.9.0)\n",
+            "Requirement already satisfied: cachetools<7,>=4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.5.2)\n",
+            "Requirement already satisfied: click<9,>=7.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (8.2.1)\n",
+            "Requirement already satisfied: numpy<3,>=1.23 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.0.2)\n",
+            "Requirement already satisfied: packaging<26,>=20 in /usr/local/lib/python3.11/dist-packages (from streamlit) (25.0)\n",
+            "Requirement already satisfied: pandas<3,>=1.4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.2.2)\n",
+            "Requirement already satisfied: pillow<12,>=7.1.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (11.3.0)\n",
+            "Requirement already satisfied: protobuf<7,>=3.20 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.29.5)\n",
+            "Requirement already satisfied: pyarrow>=7.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (18.1.0)\n",
+            "Requirement already satisfied: requests<3,>=2.27 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.32.3)\n",
+            "Requirement already satisfied: tenacity<10,>=8.1.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (8.5.0)\n",
+            "Requirement already satisfied: toml<2,>=0.10.1 in /usr/local/lib/python3.11/dist-packages (from streamlit) (0.10.2)\n",
+            "Requirement already satisfied: typing-extensions<5,>=4.4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (4.14.1)\n",
+            "Collecting watchdog<7,>=2.1.5 (from streamlit)\n",
+            "  Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m44.3/44.3 kB\u001b[0m \u001b[31m481.4 kB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hRequirement already satisfied: gitpython!=3.1.19,<4,>=3.0.7 in /usr/local/lib/python3.11/dist-packages (from streamlit) (3.1.45)\n",
+            "Collecting pydeck<1,>=0.8.0b4 (from streamlit)\n",
+            "  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)\n",
+            "Requirement already satisfied: tornado!=6.5.0,<7,>=6.0.3 in /usr/local/lib/python3.11/dist-packages (from streamlit) (6.4.2)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (3.1.6)\n",
+            "Requirement already satisfied: jsonschema>=3.0 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (4.25.0)\n",
+            "Requirement already satisfied: narwhals>=1.14.2 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (1.48.1)\n",
+            "Requirement already satisfied: gitdb<5,>=4.0.1 in /usr/local/lib/python3.11/dist-packages (from gitpython!=3.1.19,<4,>=3.0.7->streamlit) (4.0.12)\n",
+            "Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2.9.0.post0)\n",
+            "Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
+            "Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
+            "Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (3.4.2)\n",
+            "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (3.10)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (2.5.0)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (2025.7.14)\n",
+            "Requirement already satisfied: smmap<6,>=3.0.1 in /usr/local/lib/python3.11/dist-packages (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit) (5.0.2)\n",
+            "Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.11/dist-packages (from jinja2->altair<6,>=4.0->streamlit) (3.0.2)\n",
+            "Requirement already satisfied: attrs>=22.2.0 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (25.3.0)\n",
+            "Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (2025.4.1)\n",
+            "Requirement already satisfied: referencing>=0.28.4 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (0.36.2)\n",
+            "Requirement already satisfied: rpds-py>=0.7.1 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (0.26.0)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil>=2.8.2->pandas<3,>=1.4.0->streamlit) (1.17.0)\n",
+            "Downloading streamlit-1.47.1-py3-none-any.whl (9.9 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m9.9/9.9 MB\u001b[0m \u001b[31m22.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m6.9/6.9 MB\u001b[0m \u001b[31m63.7 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m79.1/79.1 kB\u001b[0m \u001b[31m6.0 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hInstalling collected packages: watchdog, pydeck, streamlit\n",
+            "Successfully installed pydeck-0.9.1 streamlit-1.47.1 watchdog-6.0.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import streamlit as st\n",
+        "import string\n",
+        "import math\n",
+        "import os\n",
+        "from collections import defaultdict\n",
+        "\n",
+        "\n",
+        "st.title(\"Mini Google - Keyword Search Engine\")\n",
+        "\n",
+        "query = st.text_input(\"Enter your search query:\")\n",
+        "\n",
+        "if st.button(\"Search\"):\n",
+        "    if query:\n",
+        "        results = compute_tfidf(query, inverted_index, doc_freq)\n",
+        "        if results:\n",
+        "            st.subheader(\"Results:\")\n",
+        "            for doc, score in results:\n",
+        "                st.write(f\"{doc} → Score: {score:.4f}\")\n",
+        "        else:\n",
+        "            st.warning(\"No matching documents found.\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "X4jTlS-ZuihB",
+        "outputId": "359c163a-0299-432e-e2ad-abb5e62de179"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "2025-08-05 14:54:53.433 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.530 \n",
+            "  \u001b[33m\u001b[1mWarning:\u001b[0m to view this Streamlit app on a browser, run it with the following\n",
+            "  command:\n",
+            "\n",
+            "    streamlit run /usr/local/lib/python3.11/dist-packages/colab_kernel_launcher.py [ARGUMENTS]\n",
+            "2025-08-05 14:54:53.532 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.534 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.538 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.539 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.541 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.543 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.544 Session state does not function when running a script without `streamlit run`\n",
+            "2025-08-05 14:54:53.546 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.549 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.551 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.553 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.556 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.557 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.560 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.560 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:54:53.562 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install streamlit\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "SRK6Cz6rvDJf",
+        "outputId": "8c8915e0-a5a1-40fd-a603-86dfdc2e9321"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: streamlit in /usr/local/lib/python3.11/dist-packages (1.47.1)\n",
+            "Requirement already satisfied: altair<6,>=4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.5.0)\n",
+            "Requirement already satisfied: blinker<2,>=1.5.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (1.9.0)\n",
+            "Requirement already satisfied: cachetools<7,>=4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.5.2)\n",
+            "Requirement already satisfied: click<9,>=7.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (8.2.1)\n",
+            "Requirement already satisfied: numpy<3,>=1.23 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.0.2)\n",
+            "Requirement already satisfied: packaging<26,>=20 in /usr/local/lib/python3.11/dist-packages (from streamlit) (25.0)\n",
+            "Requirement already satisfied: pandas<3,>=1.4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.2.2)\n",
+            "Requirement already satisfied: pillow<12,>=7.1.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (11.3.0)\n",
+            "Requirement already satisfied: protobuf<7,>=3.20 in /usr/local/lib/python3.11/dist-packages (from streamlit) (5.29.5)\n",
+            "Requirement already satisfied: pyarrow>=7.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (18.1.0)\n",
+            "Requirement already satisfied: requests<3,>=2.27 in /usr/local/lib/python3.11/dist-packages (from streamlit) (2.32.3)\n",
+            "Requirement already satisfied: tenacity<10,>=8.1.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (8.5.0)\n",
+            "Requirement already satisfied: toml<2,>=0.10.1 in /usr/local/lib/python3.11/dist-packages (from streamlit) (0.10.2)\n",
+            "Requirement already satisfied: typing-extensions<5,>=4.4.0 in /usr/local/lib/python3.11/dist-packages (from streamlit) (4.14.1)\n",
+            "Requirement already satisfied: watchdog<7,>=2.1.5 in /usr/local/lib/python3.11/dist-packages (from streamlit) (6.0.0)\n",
+            "Requirement already satisfied: gitpython!=3.1.19,<4,>=3.0.7 in /usr/local/lib/python3.11/dist-packages (from streamlit) (3.1.45)\n",
+            "Requirement already satisfied: pydeck<1,>=0.8.0b4 in /usr/local/lib/python3.11/dist-packages (from streamlit) (0.9.1)\n",
+            "Requirement already satisfied: tornado!=6.5.0,<7,>=6.0.3 in /usr/local/lib/python3.11/dist-packages (from streamlit) (6.4.2)\n",
+            "Requirement already satisfied: jinja2 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (3.1.6)\n",
+            "Requirement already satisfied: jsonschema>=3.0 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (4.25.0)\n",
+            "Requirement already satisfied: narwhals>=1.14.2 in /usr/local/lib/python3.11/dist-packages (from altair<6,>=4.0->streamlit) (1.48.1)\n",
+            "Requirement already satisfied: gitdb<5,>=4.0.1 in /usr/local/lib/python3.11/dist-packages (from gitpython!=3.1.19,<4,>=3.0.7->streamlit) (4.0.12)\n",
+            "Requirement already satisfied: python-dateutil>=2.8.2 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2.9.0.post0)\n",
+            "Requirement already satisfied: pytz>=2020.1 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
+            "Requirement already satisfied: tzdata>=2022.7 in /usr/local/lib/python3.11/dist-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
+            "Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (3.4.2)\n",
+            "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (3.10)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (2.5.0)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27->streamlit) (2025.7.14)\n",
+            "Requirement already satisfied: smmap<6,>=3.0.1 in /usr/local/lib/python3.11/dist-packages (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit) (5.0.2)\n",
+            "Requirement already satisfied: MarkupSafe>=2.0 in /usr/local/lib/python3.11/dist-packages (from jinja2->altair<6,>=4.0->streamlit) (3.0.2)\n",
+            "Requirement already satisfied: attrs>=22.2.0 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (25.3.0)\n",
+            "Requirement already satisfied: jsonschema-specifications>=2023.03.6 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (2025.4.1)\n",
+            "Requirement already satisfied: referencing>=0.28.4 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (0.36.2)\n",
+            "Requirement already satisfied: rpds-py>=0.7.1 in /usr/local/lib/python3.11/dist-packages (from jsonschema>=3.0->altair<6,>=4.0->streamlit) (0.26.0)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.11/dist-packages (from python-dateutil>=2.8.2->pandas<3,>=1.4.0->streamlit) (1.17.0)\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "import math\n",
+        "import streamlit as st\n",
+        "from collections import defaultdict\n",
+        "import pandas as pd\n",
+        "\n",
+        "def preprocess(text):\n",
+        "    return text.lower().split()\n",
+        "\n",
+        "def load_documents(folder_path):\n",
+        "    documents = {}\n",
+        "    for filename in os.listdir(folder_path):\n",
+        "        if filename.endswith(\".txt\"):\n",
+        "            with open(os.path.join(folder_path, filename), \"r\", encoding=\"utf-8\") as f:\n",
+        "                documents[filename] = preprocess(f.read())\n",
+        "    return documents\n",
+        "\n",
+        "\n",
+        "def build_inverted_index(documents):\n",
+        "    index = defaultdict(set)\n",
+        "    for doc, tokens in documents.items():\n",
+        "        for token in tokens:\n",
+        "            index[token].add(doc)\n",
+        "    return index\n",
+        "\n",
+        "def compute_doc_freq(inverted_index):\n",
+        "    return {term: len(docs) for term, docs in inverted_index.items()}\n",
+        "\n",
+        "\n",
+        "def compute_tfidf(query, inverted_index, doc_freq, documents, total_docs):\n",
+        "    scores = defaultdict(float)\n",
+        "    query_terms = preprocess(query)\n",
+        "    for term in query_terms:\n",
+        "        if term in inverted_index:\n",
+        "            idf = math.log((total_docs + 1) / (1 + doc_freq.get(term, 0))) + 1\n",
+        "            for doc in inverted_index[term]:\n",
+        "                tf = documents[doc].count(term) / len(documents[doc])\n",
+        "                scores[doc] += tf * idf\n",
+        "    return sorted(scores.items(), key=lambda x: x[1], reverse=True)\n",
+        "\n",
+        "\n",
+        "st.title(\"🧠 Mini Search Engine\")\n",
+        "st.markdown(\"Enter a keyword or phrase to search across text documents.\")\n",
+        "\n",
+        "folder_path = st.text_input(\"Folder containing .txt files\", \"docs\")\n",
+        "\n",
+        "if os.path.exists(folder_path):\n",
+        "    documents = load_documents(folder_path)\n",
+        "    inverted_index = build_inverted_index(documents)\n",
+        "    doc_freq = compute_doc_freq(inverted_index)\n",
+        "    total_docs = len(documents)\n",
+        "\n",
+        "    query = st.text_input(\"Enter your search query\")\n",
+        "\n",
+        "    if query:\n",
+        "        results = compute_tfidf(query, inverted_index, doc_freq, documents, total_docs)\n",
+        "\n",
+        "        if results:\n",
+        "            st.success(f\"Found {len(results)} result(s)\")\n",
+        "            df = pd.DataFrame(results, columns=[\"Document\", \"TF-IDF Score\"])\n",
+        "            st.dataframe(df)\n",
+        "            csv = df.to_csv(index=False).encode('utf-8')\n",
+        "            st.download_button(\"Download results as CSV\", csv, \"results.csv\", \"text/csv\")\n",
+        "        else:\n",
+        "            st.warning(\"No results found.\")\n",
+        "else:\n",
+        "    st.info(\"Enter a valid folder path where .txt files are located\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fFhb_j2AvTic",
+        "outputId": "6ed9c080-a6e5-48b4-bbf0-781b01144ef0"
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "2025-08-05 14:58:25.639 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.642 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.645 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.649 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.651 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.654 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.657 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.660 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.663 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.665 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.668 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.671 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.672 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.676 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.678 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
+            "2025-08-05 14:58:25.681 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "with open(\"app.py\", \"w\") as f:\n",
+        "    f.write(\"\"\"<paste the entire code above inside this string block>\"\"\")\n"
+      ],
+      "metadata": {
+        "id": "bwMl6P_3vakp"
+      },
+      "execution_count": 20,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import files\n",
+        "files.download(\"app.py\")\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 17
+        },
+        "id": "IP0aYhjVvgNj",
+        "outputId": "2cb3f49c-6b43-458e-bbeb-edfe200f9741"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Javascript object>"
+            ],
+            "application/javascript": [
+              "\n",
+              "    async function download(id, filename, size) {\n",
+              "      if (!google.colab.kernel.accessAllowed) {\n",
+              "        return;\n",
+              "      }\n",
+              "      const div = document.createElement('div');\n",
+              "      const label = document.createElement('label');\n",
+              "      label.textContent = `Downloading \"${filename}\": `;\n",
+              "      div.appendChild(label);\n",
+              "      const progress = document.createElement('progress');\n",
+              "      progress.max = size;\n",
+              "      div.appendChild(progress);\n",
+              "      document.body.appendChild(div);\n",
+              "\n",
+              "      const buffers = [];\n",
+              "      let downloaded = 0;\n",
+              "\n",
+              "      const channel = await google.colab.kernel.comms.open(id);\n",
+              "      // Send a message to notify the kernel that we're ready.\n",
+              "      channel.send({})\n",
+              "\n",
+              "      for await (const message of channel.messages) {\n",
+              "        // Send a message to notify the kernel that we're ready.\n",
+              "        channel.send({})\n",
+              "        if (message.buffers) {\n",
+              "          for (const buffer of message.buffers) {\n",
+              "            buffers.push(buffer);\n",
+              "            downloaded += buffer.byteLength;\n",
+              "            progress.value = downloaded;\n",
+              "          }\n",
+              "        }\n",
+              "      }\n",
+              "      const blob = new Blob(buffers, {type: 'application/binary'});\n",
+              "      const a = document.createElement('a');\n",
+              "      a.href = window.URL.createObjectURL(blob);\n",
+              "      a.download = filename;\n",
+              "      div.appendChild(a);\n",
+              "      a.click();\n",
+              "      div.remove();\n",
+              "    }\n",
+              "  "
+            ]
+          },
+          "metadata": {}
+        },
+        {
+          "output_type": "display_data",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Javascript object>"
+            ],
+            "application/javascript": [
+              "download(\"download_0196b949-8c88-4818-b65c-b8e3cc3cfe35\", \"app.py\", 54)"
+            ]
+          },
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}
