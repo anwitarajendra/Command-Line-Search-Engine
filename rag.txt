@@ -1,0 +1,1 @@
+Retrieval-Augmented Generation (RAG) is a hybrid approach combining LLMs with external knowledge sources. When a query is made, the model retrieves relevant documents and conditions the language model on them to generate more accurate, grounded responses. RAG improves factual accuracy and reduces hallucinations in LLM outputs.

@@ -1,0 +1,1 @@
+Agentic AI refers to systems that exhibit autonomy, goal-driven behavior, and reasoning capabilities. Unlike traditional models that only respond to inputs, agentic AI can plan, monitor, and adapt over time. This emerging paradigm is used in AI agents like AutoGPT and BabyAGI, enabling multi-step task completion and tool usage.

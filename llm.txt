@@ -1,0 +1,1 @@
+Large Language Models (LLMs) are a class of deep learning models trained on massive text datasets. They use transformer architectures to generate, complete, and summarize human-like text. GPT, BERT, and T5 are prominent examples. LLMs are capable of zero-shot and few-shot learning, making them adaptable across various NLP tasks.
