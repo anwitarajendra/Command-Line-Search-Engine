@@ -1,4 +1,4 @@
-# Command Line Search Engine (Mini Google)
+# Command Line Search Engine 
 
 A simple yet powerful offline search engine built in Python. It indexes a folder of plain text files and lets you search through them instantly using keyword queries. Perfect for fast document lookup, LLM notes retrieval, and offline NLP-based search experiments.
 
