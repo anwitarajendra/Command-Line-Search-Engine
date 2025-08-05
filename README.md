@@ -16,7 +16,7 @@ A simple yet powerful offline search engine built in Python. It indexes a folder
 - os, re, collections (for indexing)
 - Streamlit (for optional web interface)
 
-## 🧪 How It Works
+## How It Works
 
 1. The script reads all .txt files inside the docs/ folder.
 2. An inverted index is built mapping each word to the documents and line numbers it appears in.
