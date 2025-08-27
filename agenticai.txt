@@ -1,2 +1,3 @@
-Agentic AI represents a paradigm shift from passive assistants to autonomous systems that can independently initiate, plan, and execute complex tasks. Instead of simply reacting to prompts, this technology enables AI to make its own decisions and adapt to achieve high-level goals.
+Agentic AI marks a shift from passive, command-driven assistants to autonomous systems capable of independently initiating, planning, and executing complex tasks. Unlike traditional AI that only reacts to prompts, these systems can make decisions, adapt in real time, and pursue high-level goals with greater initiative and flexibility.
+
 
